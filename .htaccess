@@ -1,0 +1,21 @@
+Options +FollowSymLinks
+AllowOverride None
+RewriteEngine On
+
+#Not necessarily needs a RewriteCond
+#The pattern part (first one) could not exist because will be redirected by the second part
+#The resulting part (second one) MUST exist, paths used in this part begin from document root
+
+#RewriteRule ^exercises/gallery.php$ index.php
+#RewriteRule ^uploads/(.*)$ resources/css/$1
+#RewriteRule ^uploads/$ contents/
+
+#Resources rules
+RewriteRule layout/(.*)$ resources/css/$1
+RewriteRule img/(.*)$ resources/img/$1
+RewriteRule js/(.*)$ resources/js/$1
+
+#Structural rules
+#RewriteCond %{SCRIPT_FILENAME} !-d
+#RewriteCond %{SCRIPT_FILENAME} !-f
+#RewriteRule ^(.*)$	index.php?p=$1 [L]
