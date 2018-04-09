@@ -25,10 +25,10 @@
   </div>
   <div class="input-field col s12 m12 l3">
     <p class="search">Show as:</p>
-    <a class="btn waves-effect waves-light indigo">
+    <a id="show-cards" class="btn waves-effect waves-light indigo">
       <i class="material-icons">grid_on</i>
     </a>
-    <a class="btn waves-effect waves-light indigo">
+    <a id="show-table" class="btn waves-effect waves-light indigo">
       <i class="material-icons">list</i>
     </a>
   </div>

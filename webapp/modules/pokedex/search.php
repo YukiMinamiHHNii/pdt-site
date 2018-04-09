@@ -7,7 +7,9 @@
     </p>
     <?php require('../../components/pokedex/search-form.php')?>
   </div>
-  <?php //require('../../components/pokedex/search-cards.php')?>
-  <?php require('../../components/pokedex/search-table.php')?>
+  <div id="show-result" class="col s12 m12 l8 offset-l2 table-container">
+    <?php require('../../components/pokedex/search-cards.php')?>
+    <?php //require('../../components/pokedex/search-table.php')?>
+  </div>
 </div>
 <?php require_once('../../components/layout/footer.php')?>

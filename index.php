@@ -1,4 +1,6 @@
-<?php require_once('webapp/components/layout/header.php')?>
+<?php
+  require_once('webapp/components/layout/header.php');
+  ?>
 <div class="row">
   <div class="grey lighten-4 col m8 offset-m2 hoverable ">
     <h1 class="col l12 center-align">Index test</h1>
