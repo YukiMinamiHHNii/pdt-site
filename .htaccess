@@ -1,5 +1,3 @@
-Options +FollowSymLinks
-AllowOverride None
 RewriteEngine On
 
 #Not necessarily needs a RewriteCond
