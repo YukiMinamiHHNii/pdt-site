@@ -1,3 +1,4 @@
+const URL= window.location.origin + '/'+ window.location.pathname.split('/')[1];
 (
   (d, c) => {
     c("Connected");
@@ -31,7 +32,7 @@ function showPokedexCards() {
 
   showCards.addEventListener('click', e => {
     e.preventDefault();
-    request.open('GET', '../../components/pokedex/search-cards.php');
+    request.open('GET', `${URL}/pokedex/search-cards.php`);
 
     request.addEventListener('readystatechange', e => {
       // console.log(request);
@@ -52,7 +53,7 @@ function showPokedexTable() {
 
   showTable.addEventListener('click', e => {
     e.preventDefault();
-    request.open('GET', 'http://localhost:85/webapp/components/pokedex/search-table.php');
+    request.open('GET', `${URL}/pokedex/search-table.php`);
 
     request.addEventListener('readystatechange', e => {
       // console.log(request);
