@@ -11,6 +11,10 @@
 			$_GET['module']='webapp/modules/pokedex/search.php';
 			break;
 
+		case 'single':
+			$_GET['module']='webapp/modules/pokedex/single.php';
+			break;
+
 		case 'movedex':
 			$_GET['module']='webapp/modules/movedex/search.php';
 			break;

@@ -16,6 +16,7 @@
     <nav class="indigo">
       <div class="nav-wrapper container">
         <a href="#" class="brand-logo">Logo</a>
+        <a href="#" data-target="mobile-demo" class="dropdown-trigger hide-on-large-only"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="pokedex">Pokédex</a></li>
           <li><a href="movedex">Moves</a></li>
@@ -24,5 +25,13 @@
         </ul>
       </div>
     </nav>
+
+    <ul class="dropdown-content" id="mobile-demo">
+      <li><a href="pokedex">Pokédex</a></li>
+      <li><a href="movedex">Moves</a></li>
+      <li><a href="abilitydex">Abilities</a></li>
+      <li><a href="formatdex">Formats</a></li>
+    </ul>
+
   </header>
   <main>

@@ -15,13 +15,13 @@
     <div class="col s12 m3 l3">
         <div class="card">
             <div class="card-image hoverable">
-                <a href="#">
+                <a href="pokedex">
                     <img src="https://picsum.photos/200/200?random">
                     </img>
                 </a>
             </div>
             <div class="card-content center-align">
-                <a href="#">
+                <a href="pokedex">
                     Pokémon
                 </a>
             </div>
@@ -30,13 +30,13 @@
     <div class="col s12 m3 l3">
         <div class="card">
             <div class="card-image hoverable">
-                <a href="#">
+                <a href="movedex">
                     <img src="https://picsum.photos/200/200?random">
                     </img>
                 </a>
             </div>
             <div class="card-content center-align">
-                <a href="#">
+                <a href="movedex">
                     Moves
                 </a>
             </div>
@@ -45,13 +45,13 @@
     <div class="col s12 m3 l3">
         <div class="card">
             <div class="card-image hoverable">
-                <a href="#">
+                <a href="abilitydex">
                     <img src="https://picsum.photos/200/200?random">
                     </img>
                 </a>
             </div>
             <div class="card-content center-align">
-                <a href="#">
+                <a href="abilitydex">
                     Abilities
                 </a>
             </div>
@@ -60,13 +60,13 @@
     <div class="col s12 m3 l3">
         <div class="card">
             <div class="card-image hoverable">
-                <a href="#">
+                <a href="formatdex">
                     <img src="https://picsum.photos/200/200?random">
                     </img>
                 </a>
             </div>
             <div class="card-content center-align">
-                <a href="#">
+                <a href="formatdex">
                     Formats
                 </a>
             </div>
