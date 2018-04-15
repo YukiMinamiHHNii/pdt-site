@@ -15,7 +15,7 @@
   <header class="navbar">
     <nav class="indigo">
       <div class="nav-wrapper container">
-        <a href="#" class="brand-logo">Logo</a>
+        <a href="anon" class="brand-logo">Logo</a>
         <a href="#" data-target="mobile-demo" class="dropdown-trigger hide-on-large-only"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="pokedex">Pokédex</a></li>

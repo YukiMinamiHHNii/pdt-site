@@ -7,6 +7,7 @@
         initModal();
         showPokedexCards();
         showPokedexTable();
+        getPokedexFilterValues();
     })(document, console.log);
 
 function initNav() {
@@ -33,7 +34,7 @@ function showPokedexCards() {
     let showCards = document.getElementById('show-cards'),
         showResult = document.getElementById('show-result'),
         request = getXHRType();
-        
+
     if (showCards) {
         showCards.addEventListener('click', e => {
             e.preventDefault();
@@ -63,6 +64,52 @@ function showPokedexTable() {
                 }
             });
             request.send();
+        });
+    }
+}
+
+function getPokedexFilterValues() {
+    let filterType= document.getElementById('pokedex-filterType'),
+        filterValue= document.getElementById('pokedex-filterValue'),
+        res;
+
+    if (filterType) {
+        filterType.addEventListener('change', e => {
+          request= getXHRType();
+          filterValue.options.length=0;
+          switch (e.target.value) {
+            case 'typing':
+              request.open('GET', 'src/controllers/TypingController.php?q=1');
+              request.addEventListener('readystatechange', e => {
+                  if (request.readyState === 4) {
+                    res=JSON.parse(request.response);
+                    res.data.forEach(e=>{
+                      let newOption = document.createElement("option");
+                      newOption.value = e.typing_id;
+                      newOption.innerHTML = e.name;
+                      filterValue.options.add(newOption);
+                    });
+                    M.FormSelect.init(filterValue);
+                  }
+              });
+              break;
+            case 'ability':
+              request.open('GET', 'src/controllers/AbilityController.php?q=1');
+              request.addEventListener('readystatechange', e => {
+                  if (request.readyState === 4) {
+                    res=JSON.parse(request.response);
+                    res.data.forEach(e=>{
+                      let newOption = document.createElement("option");
+                      newOption.value = e.Ability_id;
+                      newOption.innerHTML = e.name;
+                      filterValue.options.add(newOption);
+                    });
+                    M.FormSelect.init(filterValue);
+                  }
+              });
+              break;
+          }
+          request.send();
         });
     }
 }
