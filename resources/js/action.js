@@ -79,7 +79,7 @@ function getPokedexFilterValues() {
           filterValue.options.length=0;
           switch (e.target.value) {
             case 'typing':
-              request.open('GET', 'src/controllers/TypingController.php?q=1');
+              request.open('GET', 'src/controllers/typing/TypingController.php?q=1');
               request.addEventListener('readystatechange', e => {
                   if (request.readyState === 4) {
                     res=JSON.parse(request.response);
@@ -94,7 +94,7 @@ function getPokedexFilterValues() {
               });
               break;
             case 'ability':
-              request.open('GET', 'src/controllers/AbilityController.php?q=1');
+              request.open('GET', 'src/controllers/ability/AbilityController.php?q=1');
               request.addEventListener('readystatechange', e => {
                   if (request.readyState === 4) {
                     res=JSON.parse(request.response);

@@ -1,5 +1,5 @@
 <?php
-require ('../dao/AbilityDAO.php');
+require ('../../dao/AbilityDAO.php');
 
 $ability= new AbilityDAO();
 
