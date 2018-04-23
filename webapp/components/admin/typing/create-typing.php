@@ -1,0 +1,22 @@
+<div id="typing-create" class="modal modal-fixed-footer">
+  <form class='form-add'>
+    <div class="modal-content">
+      <h4>Create new typing</h4>
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="typingName" type="text" maxlength="50" pattern="[A-Za-z0-9]{1,}" class="validate">
+          <label for="typingName">Type name</label>
+          <span class="helper-text" data-error="Wrong input data" data-success="Correct input data"/>
+        </div>
+        <div class="row">
+          <div class="col s12 right-align">
+            <input type="submit" class="btn waves-effect waves-light indigo" value="Save">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer grey lighten-4">
+      <a class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </form>
+</div>

@@ -41,3 +41,7 @@ p {
 .single-nav a {
   display: inline-block;
 }
+
+input[type="submit"], .btn input[type="reset"]{
+  color:#FAFAFA;
+}

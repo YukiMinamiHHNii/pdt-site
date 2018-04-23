@@ -9,24 +9,23 @@
         $conn = $this->connect();
 
         if($conn){
-          $typingName=$_POST['typingName'];
+          $typingName= $_POST['typingName'];
           $query=$conn->prepare("INSERT INTO typing(name) VALUES (?)");
           $query->bind_param('s', $typingName);
           $query->execute();
-          
+
           $res = array(
             'type'=>'Create typing',
-            'data'=>"Typing '$typingName' created successfully";
+            'data'=>"Typing '$typingName' created successfully"
           );
         }else{
           throw new Exception("Error Processing Request", 1);
         }
 
       } catch (Exception $e) {
-        // will not work like this obviously log.debug($e.getMessage());
         $res = array(
             'type'=>'Create typing',
-            'data'=>"Error while creating typing",
+            'data'=>'Error while creating typing',
             'message'=>$e.getMessage()
           );
       }finally{
@@ -51,7 +50,7 @@
           while($row = $result->fetch_assoc()) {
             array_push($data, $row);
           }
-          
+
           $res = array(
             'type'=>'Read typing',
             'numRows' => $result->num_rows,
@@ -73,10 +72,69 @@
 
     public function update(){
 
+      try {
+        $conn = $this->connect();
+
+        if($conn){
+          $typingID= $_POST['typingID'];
+          $typingName= $_POST['typingName'];
+          $query=$conn->prepare("UPDATE typing SET name=? WHERE typing_id=?");
+          $query->bind_param('si', $typingName, $typingID);
+          $query->execute();
+
+          $res = array(
+            'type'=>'Edit typing',
+            'data'=>"Typing: '$typingID' edited successfully"
+          );
+        }else{
+          throw new Exception("Error Processing Request", 1);
+        }
+
+      } catch (Exception $e) {
+        $res = array(
+            'type'=>'Edit typing',
+            'data'=>'Error while editing typing',
+            'message'=>$e.getMessage()
+          );
+      }finally{
+        $conn=$this->disconnect();
+      }
+
+      return json_encode($res);
+
     }
 
     public function delete(){
 
+      try {
+        $conn = $this->connect();
+
+        if($conn){
+          $typingID= $_POST['typingID'];
+          $query=$conn->prepare("DELETE FROM typing WHERE typing_id=?");
+          $query->bind_param('i', $typingID);
+          $query->execute();
+
+          $res = array(
+            'type'=>'Delete typing',
+            'data'=>"Typing: '$typingID' deleted successfully"
+          );
+        }else{
+          throw new Exception("Error Processing Request", 1);
+        }
+
+      } catch (Exception $e) {
+        $res = array(
+            'type'=>'Delete typing',
+            'data'=>'Error while editing typing',
+            'message'=>$e.getMessage()
+          );
+      }finally{
+        $conn=$this->disconnect();
+      }
+
+      return json_encode($res);
+
     }
 
-  }
+}
