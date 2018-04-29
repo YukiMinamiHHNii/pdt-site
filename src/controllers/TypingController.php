@@ -1,5 +1,5 @@
 <?php
-  require ('../../dao/TypingDAO.php');
+  require ('../dao/TypingDAO.php');
 
   $typing= new TypingDAO();
 

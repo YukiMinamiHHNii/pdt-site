@@ -1,7 +1,7 @@
 <?php
   require('DAO.php');
 
-  class TypingDAO extends DAO{
+  class FormatDAO extends DAO{
 
     public function create(){
 
@@ -9,9 +9,10 @@
         $conn = $this->connect();
 
         if($conn){
-          $typingName= $_POST['typingName'];
-          $query=$conn->prepare("INSERT INTO typing(name) VALUES (?)");
-          $query->bind_param('s', $typingName);
+          $formatName= $_POST['formatName'];
+          $formatDesc= $_POST['formatDesc'];
+          $query=$conn->prepare("INSERT INTO battle_format(name, description) VALUES (?,?)");
+          $query->bind_param('ss', $formatName, $formatDesc);
           $query->execute();
 
           $res = array(
