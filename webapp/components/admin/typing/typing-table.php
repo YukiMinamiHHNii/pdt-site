@@ -28,4 +28,3 @@
     </td>
   </tr>
 </template>
-</div>

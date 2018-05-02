@@ -8,5 +8,8 @@
     <?php require('webapp/components/pokedex/search-form.php')?>
 </div>
 <div class="col s12 m12 l8 offset-l2 table-container" id="show-result">
-    <?php require('webapp/components/pokedex/search-cards.php')?>
+
 </div>
+
+<?php require('webapp/components/pokedex/search-cards.php')?>
+<?php require('webapp/components/pokedex/search-table.php')?>

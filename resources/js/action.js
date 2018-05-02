@@ -8,7 +8,7 @@
     showPokedexCards();
     showPokedexTable();
     getPokedexFilterValues();
-    readAllTyping();
+    pokedexOperations();
     typingOperations();
   })(document, console.log);
 
@@ -51,9 +51,10 @@ function ajaxRequest(data, callback) {
   req.addEventListener('readystatechange', e => {
     if (req.readyState === 4) {
       if (req.status >= 200 && req.status < 400) {
-        //console.log(req.response);
+        console.log(req.response);
         callback(JSON.parse(req.response));
       } else {
+        console.log(req.response);
         callback(JSON.parse({
             type:'AJAX Post',
             data:`${req.status}`,
@@ -70,6 +71,11 @@ function ajaxRequest(data, callback) {
   }
 }
 
+function pokedexOperations(){
+  document.addEventListener('DOMContentLoaded', e=>{
+    readAllSpecies();
+  });
+}
 
 function showPokedexCards() {
   let showCards = document.getElementById('show-cards'),
@@ -78,17 +84,62 @@ function showPokedexCards() {
 
   if (showCards) {
     showCards.addEventListener('click', e => {
-      e.preventDefault();
-      request.open('GET', '/pokedex/search-cards.php');
-      request.addEventListener('readystatechange', e => {
-        if (request.readyState === 4) {
-          showResult.innerHTML = request.response;
-        }
-      });
-      request.send();
+      showResult.innerHTML='<p>TestingCards</p>';
+      // request.open('GET', '/pokedex/search-cards.php');
+      // request.addEventListener('readystatechange', e => {
+      //   if (request.readyState === 4) {
+      //     showResult.innerHTML = request.response;
+      //   }
+      // });
+      // request.send();
     });
   }
 }
+
+function readAllSpecies(){
+  let showResult = document.getElementById('show-result'),
+      cards= document.getElementById('pokemon-card-template').content,
+      req={
+        type:'GET',
+        endpoint:'/src/controllers/SpeciesController.php?q=1',
+        args:null
+      };
+
+    ajaxRequest(req, res=>{
+      res.data.forEach(row=>{
+        cards.querySelector('.card-name').textContent= row.name;
+
+        getSpeciesTypings(row.typing, typings=>{
+          cards.querySelector('.card-typing').textContent= typings.join('/');
+        });
+
+        getSpeciesAbilities(row.ability, abilities=>{
+          cards.querySelector('.card-ability').textContent= abilities.join('/');
+        });
+
+        let clone = document.importNode(cards, true);
+        showResult.appendChild(clone);
+      });
+    });
+
+}
+
+function getSpeciesTypings(typingObj, callback){
+  let typings=[];
+  typingObj.forEach(obj=>{
+      typings.push(obj.name);
+  });
+  callback(typings);
+}
+
+function getSpeciesAbilities(abilityObj, callback){
+  let abilities=[];
+  abilityObj.forEach(obj=>{
+      abilities.push(obj.name);
+  });
+  callback(abilities);
+}
+
 
 function showPokedexTable() {
   let showTable = document.getElementById('show-table'),
@@ -121,7 +172,7 @@ function getPokedexFilterValues() {
         case 'typing':
           req= {
             type: 'GET',
-            endpoint: '/src/controllers/typing/TypingController.php?q=1',
+            endpoint: '/src/controllers/TypingController.php?q=1',
             args: null
           };
 
@@ -139,7 +190,7 @@ function getPokedexFilterValues() {
         case 'ability':
           req = {
             type: 'GET',
-            endpoint: '/src/controllers/ability/AbilityController.php?q=1',
+            endpoint: '/src/controllers/AbilityController.php?q=1',
             args: null
           };
 
@@ -158,35 +209,6 @@ function getPokedexFilterValues() {
   }
 }
 
-function readAllTyping(){
-  let typingTable= document.getElementById('typing-table'),
-      typingRow= document.getElementById('typing-row').content,
-      req={
-        type:'GET',
-        endpoint:'/src/controllers/typing/TypingController.php?q=1',
-        args:null
-      };
-
-  if(typingTable){
-    typingTable.innerHTML="";
-    ajaxRequest(req, res=>{
-      res.data.forEach(row=>{
-
-        typingRow.querySelector('.typing-id').textContent = row.typing_id;
-        typingRow.querySelector('.typing-name').textContent = row.name;
-        typingRow.querySelector('.typing-edit').dataset.id = row.typing_id;
-        typingRow.querySelector('.typing-edit').dataset.name = row.name;
-        typingRow.querySelector('.typing-delete').dataset.id = row.typing_id;
-        typingRow.querySelector('.typing-delete').dataset.name = row.name;
-
-
-        let clone = document.importNode(typingRow, true);
-        typingTable.appendChild(clone);
-      });
-    });
-  }
-}
-
 function typingOperations(){
   document.addEventListener('submit', e=>{
     let req, action;
@@ -201,7 +223,7 @@ function typingOperations(){
 
     req={
       type:'POST',
-      endpoint:`/src/controllers/typing/TypingController.php?q=${action}`,
+      endpoint:`/src/controllers/TypingController.php?q=${action}`,
       args:new FormData(e.target)
     }
 
@@ -222,5 +244,31 @@ function typingOperations(){
       form.querySelector('[name="typingID"]').value = e.target.dataset.id;
     }
   });
+}
 
+function readAllTyping(){
+  let typingTable= document.getElementById('typing-table'),
+      typingRow= document.getElementById('typing-row').content,
+      req={
+        type:'GET',
+        endpoint:'/src/controllers/TypingController.php?q=1',
+        args:null
+      };
+
+  if(typingTable){
+    typingTable.innerHTML="";
+    ajaxRequest(req, res=>{
+      res.data.forEach(row=>{
+        typingRow.querySelector('.typing-id').textContent = row.typing_id;
+        typingRow.querySelector('.typing-name').textContent = row.name;
+        typingRow.querySelector('.typing-edit').dataset.id = row.typing_id;
+        typingRow.querySelector('.typing-edit').dataset.name = row.name;
+        typingRow.querySelector('.typing-delete').dataset.id = row.typing_id;
+        typingRow.querySelector('.typing-delete').dataset.name = row.name;
+
+        let clone = document.importNode(typingRow, true);
+        typingTable.appendChild(clone);
+      });
+    });
+  }
 }
