@@ -2,30 +2,25 @@
   <div class="col s12 m6 l4">
     <div class="card">
       <div class="card-image">
-        <a href="single">
-          <img src="img/pokedex/large/001.png">
-        </a>
+        <img class="activator" src="img/pokedex/large/001.png">
       </div>
       <div class="card-content">
-        <table class="striped responsive-table">
-          <tbody>
-            <tr>
-              <td>Name:</td>
-              <td class="card-name"></td>
-            </tr>
-            <tr>
-              <td>Typing:</td>
-              <td class="card-typing"></td>
-            </tr>
-            <tr>
-              <td>Abilities:</td>
-              <td class="card-ability"></td>
-            </tr>
-          </tbody>
-        </table>
         <div class="card-action">
-          <a href="single">Read more...</a>
+          <a class="card-name indigo-text" href="#"></a>
         </div>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title">Pokémon data<i class="material-icons right">close</i></span>
+        <ul class="collection">
+          <li class="collection-item">
+            <h6><b>Typing:</b></h6>
+            <span class="card-typing"></span>
+          </li>
+          <li class="collection-item">
+            <h6><b>Ability:</b></h6>
+            <span class="card-ability"></span>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
