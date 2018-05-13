@@ -1,9 +1,10 @@
 <form>
-  <div class="input-field inline col s12 m12 l3">
+  <!-- <div class="input-field inline col s12 m12 l3"> -->
+  <div class="input-field inline col s12">
     <label for="search">Search:</label>
     <input name="search" type="text" class="validate">
   </div>
-  <div class="input-field col s12 m12 l3">
+  <!-- <div class="input-field col s12 m12 l3">
     <select id='pokedex-filterType' name="filterType">
       <option value="" disabled selected>Choose your option</option>
       <option value="typing">Typing</option>
@@ -25,5 +26,5 @@
     <a id="show-table" class="btn waves-effect waves-light indigo">
       <i class="material-icons">list</i>
     </a>
-  </div>
+  </div> -->
 </form>

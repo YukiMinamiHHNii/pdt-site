@@ -8,8 +8,8 @@
 	<div class="col s12 m3 l3">
 		<div class="card">
 			<div class="card-image hoverable">
-				<a href="admin/pokemon">
-					<img src="img/pokedex/large/001.png">
+				<a href="admin-pokemon">
+					<img src="img/pokedex/large/1-0.png">
                 </a>
                 <div class="card-content center-align">
                 	<a href="admin-pokemon">
@@ -22,8 +22,8 @@
     <div class="col s12 m3 l3">
 		<div class="card">
 			<div class="card-image hoverable">
-				<a href="admin/moves">
-					<img src="img/pokedex/large/002.png">
+				<a href="admin-moves">
+					<img src="img/pokedex/large/2-0.png">
                 </a>
                 <div class="card-content center-align">
                 	<a href="admin-moves">
@@ -36,8 +36,8 @@
     <div class="col s12 m3 l3">
 		<div class="card">
 			<div class="card-image hoverable">
-				<a href="admin/abilities">
-					<img src="img/pokedex/large/003.png">
+				<a href="admin-abilities">
+					<img src="img/pokedex/large/3-0.png">
                 </a>
                 <div class="card-content center-align">
                 	<a href="admin-abilities">
@@ -50,8 +50,8 @@
     <div class="col s12 m3 l3">
 		<div class="card">
 			<div class="card-image hoverable">
-				<a href="admin/formats">
-					<img src="img/pokedex/large/004.png">
+				<a href="admin-formats">
+					<img src="img/pokedex/large/4-0.png">
                 </a>
                 <div class="card-content center-align">
                 	<a href="admin-formats">
@@ -65,10 +65,10 @@
 		<div class="card">
 			<div class="card-image hoverable">
 				<a href="admin-typing">
-					<img src="img/pokedex/large/005.png">
+					<img src="img/pokedex/large/5-0.png">
                 </a>
                 <div class="card-content center-align">
-                	<a href="admin/typing">
+                	<a href="admin-typing">
 	                    Manage typing
     	            </a>
             	</div>

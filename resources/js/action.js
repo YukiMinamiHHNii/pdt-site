@@ -106,29 +106,32 @@ function showPokedexCards() {
 
 function readAllSpecies(){
   let showResult = document.getElementById('show-result'),
-      cards= document.getElementById('pokemon-card-template').content,
       req={
         type:'GET',
         endpoint:'src/controllers/SpeciesController.php?q=1',
         args:null
       };
 
-    ajaxRequest(req, res=>{
-      res.data.forEach(row=>{
-        cards.querySelector('.card-name').textContent= row.name;
+    if(showResult){
+      let cards= document.getElementById('pokemon-card-template').content;
+      ajaxRequest(req, res=>{
+        res.data.forEach(row=>{
+          cards.querySelector('.card-name').textContent= row.name;
+          cards.querySelector('.card-image img').src= 'img/pokedex/large/' + row.species_id + ".png";
 
-        getSpeciesTypings(row.typing, typings=>{
-          cards.querySelector('.card-typing').textContent= typings.join('/');
+          getSpeciesTypings(row.typing, typings=>{
+            cards.querySelector('.card-typing').textContent= typings.join('/');
+          });
+
+          getSpeciesAbilities(row.ability, abilities=>{
+            cards.querySelector('.card-ability').textContent= abilities.join('/');
+          });
+
+          let clone = document.importNode(cards, true);
+          showResult.appendChild(clone);
         });
-
-        getSpeciesAbilities(row.ability, abilities=>{
-          cards.querySelector('.card-ability').textContent= abilities.join('/');
-        });
-
-        let clone = document.importNode(cards, true);
-        showResult.appendChild(clone);
       });
-    });
+    }
 
 }
 
@@ -247,14 +250,13 @@ function typingOperations(){
        endpoint: 'src/controllers/UserController.php?q=5',
        args: new FormData(e.target)
       }
-      
+
       ajaxRequest(req, res=>{
         document.querySelector('.comment-result h5').innerText=`${res.data}, ${res.mailStatus}`;
       })
 
       e.target.reset();
       setTimeout(() => window.location.reload(), 1500);
-
     }
 
   });
@@ -276,7 +278,6 @@ function typingOperations(){
 
 function readAllTyping(){
   let typingTable= document.getElementById('typing-table'),
-      typingRow= document.getElementById('typing-row').content,
       req={
         type:'GET',
         endpoint:'src/controllers/TypingController.php?q=1',
@@ -284,6 +285,7 @@ function readAllTyping(){
       };
 
   if(typingTable){
+    let typingRow= document.getElementById('typing-row').content;
     typingTable.innerHTML="";
     ajaxRequest(req, res=>{
       res.data.forEach(row=>{
@@ -305,22 +307,19 @@ function userOperations(){
 
   document.addEventListener('submit', e=>{
 
+    let req, action;
     e.preventDefault();
 
-    let req;
-
     if(e.target.matches('.register-form')){
-      req={
-       type: 'POST',
-       endpoint: 'src/controllers/UserController.php?q=1',
-       args: new FormData(e.target)
-      }
+      action=1;
     }else if(e.target.matches('.login-form')){
-      req={
-       type: 'POST',
-       endpoint: 'src/controllers/UserController.php?q=2',
-       args: new FormData(e.target) 
-      }
+      action=2;
+    }
+
+    req={
+     type: 'POST',
+     endpoint: `src/controllers/UserController.php?q=${action}`,
+     args: new FormData(e.target)
     }
 
     ajaxRequest(req, res=>{
@@ -328,6 +327,7 @@ function userOperations(){
     })
 
     e.target.reset();
+    setTimeout(() => window.location.replace('/index'), 1500);
 
   });
 

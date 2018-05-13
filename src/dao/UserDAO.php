@@ -51,7 +51,7 @@
           $query->bind_param('ss', $mail, $password);
           $query->execute();
 
-          $result = $query->get_result();
+          $result= $query->get_result();
           $data= array();
 
           while($row = $result->fetch_assoc()) {
@@ -59,13 +59,13 @@
           }
 
           if($result->num_rows>0){
-            $res = array(
+            $res= array(
               'type'=>'Read user',
               'data' => "User with mail ${mail} logged successfully",
               'result'=>true
-            );  
+            );
           }else{
-            $res = array(
+            $res= array(
               'type'=>'Read user',
               'data' => "Error while logging in user with mail: ${mail}",
               'result'=>false
@@ -86,7 +86,7 @@
         $conn=$this->disconnect();
       }
 
-      return json_encode($res);
+      return $res;
 
     }
 

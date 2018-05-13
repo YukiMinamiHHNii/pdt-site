@@ -8,7 +8,14 @@ switch ($_GET['q']) {
       echo $user->create();
       break;
      case 2:
-       echo $user->read();
+       $data= $user->read();
+       session_start();
+       if($data['result']){
+         $_SESSION['logged']=true;
+       }else{
+         $_SESSION['logged']=false;
+       }
+       echo json_encode($data);
        break;
      case 3:
        echo $user->update();

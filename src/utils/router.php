@@ -1,10 +1,16 @@
 <?php
-	$route=(isset($_GET['q']))?$_GET['q']:'anon';
-	
+	session_start();
+	$route=(isset($_GET['q']))?$_GET['q']:'index';
+	$session=(isset($_SESSION['logged']))?$_SESSION['logged']:false;
+
 	switch ($route) {
-		
-		case 'anon':
-			$_GET['module']='webapp/modules/dashboard/anon.php';
+
+		case 'index':
+			if($session){
+				$_GET['module']='webapp/modules/admin/index.php';
+			}else{
+				$_GET['module']='webapp/modules/dashboard/anon.php';
+			}
 			break;
 
 		case 'comments':
@@ -20,6 +26,8 @@
 			break;
 
 		case 'logout':
+			session_destroy();
+			$session=false;
 			$_GET['module']='webapp/modules/dashboard/anon.php';
 			break;
 
@@ -66,7 +74,7 @@
 		case 'admin-typing':
 			$_GET['module']='webapp/modules/admin/typing/index.php';
 			break;
-		
+
 		default:
 			$_GET['module']='webapp/modules/dashboard/404.php';
 			break;
