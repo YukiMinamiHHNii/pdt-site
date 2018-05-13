@@ -27,7 +27,7 @@
         $res = array(
             'type'=>'Create ability',
             'data'=>'Error while creating ability',
-            'message'=>$e.getMessage()
+            'message'=>$e->getMessage()
           );
       }finally{
         $conn=$this->disconnect();
@@ -64,7 +64,7 @@
         $res = array(
             'type'=>'Read ability',
             'data'=>'Error while reading abilities',
-            'message'=>$e.getMessage()
+            'message'=>$e->getMessage()
           );
       }finally{
         $conn=$this->disconnect();
@@ -99,7 +99,7 @@
         $res = array(
             'type'=>'Edit ability',
             'data'=>'Error while editing ability',
-            'message'=>$e.getMessage()
+            'message'=>$e->getMessage()
           );
       }finally{
         $conn=$this->disconnect();
@@ -132,7 +132,7 @@
         $res = array(
             'type'=>'Delete typing',
             'data'=>'Error while editing typing',
-            'message'=>$e.getMessage()
+            'message'=>$e->getMessage()
           );
       }finally{
         $conn=$this->disconnect();

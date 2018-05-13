@@ -1,7 +1,6 @@
 (
   (d, c) => {
     c("Connected");
-    initNav();
     initSelect();
     initTabs();
     initModal();
@@ -10,26 +9,35 @@
     getPokedexFilterValues();
     pokedexOperations();
     typingOperations();
+    userOperations();
+    readAllTyping();
   })(document, console.log);
 
 function initNav() {
-  var el = document.querySelector('.dropdown-trigger');
+  var el = document.querySelectorAll('.dropdown-trigger');
   var instance = M.Dropdown.init(el);
 }
 
+function initDropdown(){
+  $('.dropdown-button').dropdown();
+}
+
 function initSelect() {
-  var el = document.querySelectorAll('select');
-  var instance = M.FormSelect.init(el);
+  //var el = document.querySelectorAll('select');
+  //var instance = M.FormSelect.init(el);
+  $('select').material_select();
 }
 
 function initTabs() {
-  var el = document.querySelectorAll('.tabs');
-  var instance = M.Tabs.init(el);
+  //var el = document.querySelectorAll('.tabs');
+  //var instance = M.Tabs.init(el);
+  $('ul.tabs').tabs();
 }
 
 function initModal() {
-  var el = document.querySelectorAll('.modal');
-  var instance = M.Modal.init(el);
+  //var el = document.querySelectorAll('.modal');
+  //var instance = M.Modal.init(el);
+  $('.modal').modal();
 }
 
 function getXHRType() {
@@ -101,7 +109,7 @@ function readAllSpecies(){
       cards= document.getElementById('pokemon-card-template').content,
       req={
         type:'GET',
-        endpoint:'/src/controllers/SpeciesController.php?q=1',
+        endpoint:'src/controllers/SpeciesController.php?q=1',
         args:null
       };
 
@@ -172,7 +180,7 @@ function getPokedexFilterValues() {
         case 'typing':
           req= {
             type: 'GET',
-            endpoint: '/src/controllers/TypingController.php?q=1',
+            endpoint: 'src/controllers/TypingController.php?q=1',
             args: null
           };
 
@@ -190,7 +198,7 @@ function getPokedexFilterValues() {
         case 'ability':
           req = {
             type: 'GET',
-            endpoint: '/src/controllers/AbilityController.php?q=1',
+            endpoint: 'src/controllers/AbilityController.php?q=1',
             args: null
           };
 
@@ -213,23 +221,42 @@ function typingOperations(){
   document.addEventListener('submit', e=>{
     let req, action;
     e.preventDefault();
-    if(e.target.matches('.form-add')){
-      action=2;
-    }else if(e.target.matches('.form-edit')){
-      action=3;
-    }else if(e.target.matches('.form-delete')){
-      action=4;
+    if(e.target.matches('.form-add')||e.target.matches('.form-edit')||e.target.matches('.form-delete')){
+        if(e.target.matches('.form-add')){
+          action=2;
+         }else if(e.target.matches('.form-edit')){
+          action=3;
+        }else if(e.target.matches('.form-delete')){
+          action=4;
+        }
+
+        req={
+          type:'POST',
+          endpoint:`src/controllers/TypingController.php?q=${action}`,
+          args:new FormData(e.target)
+        }
+
+        ajaxRequest(req, res=>{
+          readAllTyping();
+        });
     }
 
-    req={
-      type:'POST',
-      endpoint:`/src/controllers/TypingController.php?q=${action}`,
-      args:new FormData(e.target)
+    if(e.target.matches('.comment-form')){
+      req={
+       type: 'POST',
+       endpoint: 'src/controllers/UserController.php?q=5',
+       args: new FormData(e.target)
+      }
+      
+      ajaxRequest(req, res=>{
+        document.querySelector('.comment-result h5').innerText=`${res.data}, ${res.mailStatus}`;
+      })
+
+      e.target.reset();
+      setTimeout(() => window.location.reload(), 1500);
+
     }
 
-    ajaxRequest(req, res=>{
-      readAllTyping();
-    });
   });
 
   document.addEventListener('click', e=>{
@@ -244,6 +271,7 @@ function typingOperations(){
       form.querySelector('[name="typingID"]').value = e.target.dataset.id;
     }
   });
+
 }
 
 function readAllTyping(){
@@ -251,7 +279,7 @@ function readAllTyping(){
       typingRow= document.getElementById('typing-row').content,
       req={
         type:'GET',
-        endpoint:'/src/controllers/TypingController.php?q=1',
+        endpoint:'src/controllers/TypingController.php?q=1',
         args:null
       };
 
@@ -271,4 +299,36 @@ function readAllTyping(){
       });
     });
   }
+}
+
+function userOperations(){
+
+  document.addEventListener('submit', e=>{
+
+    e.preventDefault();
+
+    let req;
+
+    if(e.target.matches('.register-form')){
+      req={
+       type: 'POST',
+       endpoint: 'src/controllers/UserController.php?q=1',
+       args: new FormData(e.target)
+      }
+    }else if(e.target.matches('.login-form')){
+      req={
+       type: 'POST',
+       endpoint: 'src/controllers/UserController.php?q=2',
+       args: new FormData(e.target) 
+      }
+    }
+
+    ajaxRequest(req, res=>{
+      document.querySelector('.operation-result h5').innerText=`Result: ${res.data}`;
+    })
+
+    e.target.reset();
+
+  });
+
 }

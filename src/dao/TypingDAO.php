@@ -26,7 +26,7 @@
         $res = array(
             'type'=>'Create typing',
             'data'=>'Error while creating typing',
-            'message'=>$e.getMessage()
+            'message'=>$e->getMessage()
           );
       }finally{
         $conn=$this->disconnect();
@@ -64,7 +64,7 @@
         $res = array(
             'type'=>'Read typing',
             'data'=>'Error while reading typing',
-            'message'=>$e.getMessage()
+            'message'=>$e->getMessage()
           );
       }finally{
         $conn=$this->disconnect();
@@ -98,7 +98,7 @@
         $res = array(
             'type'=>'Edit typing',
             'data'=>'Error while editing typing',
-            'message'=>$e.getMessage()
+            'message'=>$e->getMessage()
           );
       }finally{
         $conn=$this->disconnect();
@@ -131,7 +131,7 @@
         $res = array(
             'type'=>'Delete typing',
             'data'=>'Error while editing typing',
-            'message'=>$e.getMessage()
+            'message'=>$e->getMessage()
           );
       }finally{
         $conn=$this->disconnect();

@@ -7,6 +7,22 @@
 			$_GET['module']='webapp/modules/dashboard/anon.php';
 			break;
 
+		case 'comments':
+			$_GET['module']='webapp/modules/dashboard/comments.php';
+			break;
+
+		case 'register':
+			$_GET['module']='webapp/modules/dashboard/register.php';
+			break;
+
+		case 'login':
+			$_GET['module']='webapp/modules/dashboard/login.php';
+			break;
+
+		case 'logout':
+			$_GET['module']='webapp/modules/dashboard/anon.php';
+			break;
+
 		case 'pokedex':
 			$_GET['module']='webapp/modules/pokedex/search.php';
 			break;
@@ -31,23 +47,23 @@
 			$_GET['module']='webapp/modules/admin/index.php';
 			break;
 
-		case 'admin/pokemon':
+		case 'admin-pokemon':
 			$_GET['module']='webapp/modules/admin/pokemon/index.php';
 			break;
 
-		case 'admin/moves':
+		case 'admin-moves':
 			$_GET['module']='webapp/modules/admin/moves/index.php';
 			break;
 
-		case 'admin/abilities':
+		case 'admin-abilities':
 			$_GET['module']='webapp/modules/admin/abilities/index.php';
 			break;
 
-		case 'admin/formats':
+		case 'admin-formats':
 			$_GET['module']='webapp/modules/admin/formats/index.php';
 			break;
 
-		case 'admin/typing':
+		case 'admin-typing':
 			$_GET['module']='webapp/modules/admin/typing/index.php';
 			break;
 		

@@ -38,7 +38,7 @@
         $res = array(
             'type'=>'Read species',
             'data'=>'Error while reading species',
-            'message'=>$e.getMessage()
+            'message'=>$e->getMessage()
         );
       }finally{
         $conn=$this->disconnect();
@@ -76,7 +76,7 @@
         $data = array(
           'type'=>'Read species typing',
           'data'=>'Error while reading species typing',
-          'message'=>$e.getMessage()
+          'message'=>$e->getMessage()
         );
       }finally{
         $conn=$this->disconnect();
@@ -114,7 +114,7 @@
         $data = array(
           'type'=>'Read species typing',
           'data'=>'Error while reading species typing',
-          'message'=>$e.getMessage()
+          'message'=>$e->getMessage()
         );
       }finally{
         $conn=$this->disconnect();

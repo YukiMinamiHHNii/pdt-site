@@ -12,7 +12,7 @@
 					<img src="img/pokedex/large/001.png">
                 </a>
                 <div class="card-content center-align">
-                	<a href="poke-mgmt">
+                	<a href="admin-pokemon">
 	                    Manage pokémon
     	            </a>
             	</div>
@@ -26,7 +26,7 @@
 					<img src="img/pokedex/large/002.png">
                 </a>
                 <div class="card-content center-align">
-                	<a href="admin/moves">
+                	<a href="admin-moves">
 	                    Manage moves
     	            </a>
             	</div>
@@ -40,7 +40,7 @@
 					<img src="img/pokedex/large/003.png">
                 </a>
                 <div class="card-content center-align">
-                	<a href="admin/abilities">
+                	<a href="admin-abilities">
 	                    Manage abilities
     	            </a>
             	</div>
@@ -54,7 +54,7 @@
 					<img src="img/pokedex/large/004.png">
                 </a>
                 <div class="card-content center-align">
-                	<a href="admin/formats">
+                	<a href="admin-formats">
 	                    Manage formats
     	            </a>
             	</div>
@@ -64,7 +64,7 @@
     <div class="col s12 m3 l3">
 		<div class="card">
 			<div class="card-image hoverable">
-				<a href="admin/typing">
+				<a href="admin-typing">
 					<img src="img/pokedex/large/005.png">
                 </a>
                 <div class="card-content center-align">
