@@ -52,27 +52,51 @@
 			break;
 
 		case 'admin':
-			$_GET['module']='webapp/modules/admin/index.php';
+			if($session){
+				$_GET['module']='webapp/modules/admin/index.php';
+			}else{
+				$_GET['module']='webapp/modules/dashboard/anon.php';
+			}
 			break;
 
 		case 'admin-pokemon':
-			$_GET['module']='webapp/modules/admin/pokemon/index.php';
+			if($session){
+				$_GET['module']='webapp/modules/admin/pokemon/index.php';
+			}else{
+				$_GET['module']='webapp/modules/dashboard/anon.php';
+			}
 			break;
 
 		case 'admin-moves':
-			$_GET['module']='webapp/modules/admin/moves/index.php';
+			if($session){
+				$_GET['module']='webapp/modules/admin/moves/index.php';
+			}else{
+				$_GET['module']='webapp/modules/dashboard/anon.php';
+			}
 			break;
 
 		case 'admin-abilities':
-			$_GET['module']='webapp/modules/admin/abilities/index.php';
+			if($session){
+				$_GET['module']='webapp/modules/admin/abilities/index.php';
+			}else{
+				$_GET['module']='webapp/modules/dashboard/anon.php';
+			}
 			break;
 
 		case 'admin-formats':
-			$_GET['module']='webapp/modules/admin/formats/index.php';
+			if($session){
+				$_GET['module']='webapp/modules/admin/formats/index.php';
+			}else{
+				$_GET['module']='webapp/modules/dashboard/anon.php';
+			}
 			break;
 
 		case 'admin-typing':
-			$_GET['module']='webapp/modules/admin/typing/index.php';
+			if($session){
+				$_GET['module']='webapp/modules/admin/typing/index.php';
+			}else{
+				$_GET['module']='webapp/modules/dashboard/anon.php';
+			}
 			break;
 
 		default:
