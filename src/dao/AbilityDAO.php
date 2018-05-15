@@ -43,12 +43,13 @@
         $conn = $this->connect();
 
         if($conn){
-          $query=$conn->prepare('SELECT * FROM ability');
+          $query=$conn->prepare('SELECT * FROM ability ORDER BY name');
           $query->execute();
           $result = $query->get_result();
           $data= array();
 
           while($row = $result->fetch_assoc()) {
+            $row['pokemon']=$this->read_ability_species($row['ability_id']);
             array_push($data, $row);
           }
 
@@ -71,6 +72,43 @@
       }
 
       return json_encode($res);
+
+    }
+
+    public function read_ability_species($ability_id){
+
+      try {
+        $conn = $this->connect();
+
+        if($conn){
+          $query=$conn->prepare('SELECT s.species_id as species FROM ability a
+                                 INNER JOIN species_ability sa ON a.ability_id=sa.ability_id
+                                 INNER JOIN species s ON s.species_id=sa.species_id
+                                 WHERE a.ability_id= ?');
+          
+          $query->bind_param('i', $ability_id);
+          $query->execute();
+          $result = $query->get_result();
+          $data= array();
+
+          while($row = $result->fetch_assoc()) {
+            array_push($data, $row);
+          }
+
+        }else{
+          throw new Exception("Error Processing Request", 1);
+        }
+      } catch (Exception $e) {
+        $data = array(
+            'type'=>'Read ability species',
+            'data'=>'Error while reading species from ability ${ability_id}',
+            'message'=>$e->getMessage()
+          );
+      }finally{
+        $conn=$this->disconnect();
+      }
+
+      return $data;
 
     }
 

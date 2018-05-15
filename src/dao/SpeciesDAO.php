@@ -14,7 +14,7 @@
           $query=$conn->prepare("SELECT * FROM species ORDER BY
 	                               CAST(SUBSTRING_INDEX(species_id, '-', 1) AS INTEGER),
 	                               CAST(SUBSTRING_INDEX(species_id, '-', -1) AS INTEGER)
-                                 LIMIT 184");
+                                 LIMIT 183");
           $query->execute();
           $result = $query->get_result();
           $data= array();

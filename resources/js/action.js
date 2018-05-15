@@ -9,6 +9,8 @@
     getPokedexFilterValues();
     pokedexOperations();
     typingOperations();
+    abilityOperations();
+    formatOperations();
     userOperations();
     readAllTyping();
   })(document, console.log);
@@ -310,25 +312,101 @@ function userOperations(){
     let req, action;
     e.preventDefault();
 
-    if(e.target.matches('.register-form')){
-      action=1;
-    }else if(e.target.matches('.login-form')){
-      action=2;
+    if(e.target.matches('.register-form')||e.target.matches('.login-form')){
+      if(e.target.matches('.register-form')){
+        action=1;
+      }else if(e.target.matches('.login-form')){
+        action=2;
+      }
+
+      req={
+        type: 'POST',
+        endpoint: `src/controllers/UserController.php?q=${action}`,
+        args: new FormData(e.target)
+      }
+
+      ajaxRequest(req, res=>{
+        document.querySelector('.operation-result h5').innerText=`Result: ${res.data}`;
+      })
+
+      e.target.reset();
+      setTimeout(() => window.location.replace('/pdt-site/index'), 1500);
     }
-
-    req={
-     type: 'POST',
-     endpoint: `src/controllers/UserController.php?q=${action}`,
-     args: new FormData(e.target)
-    }
-
-    ajaxRequest(req, res=>{
-      document.querySelector('.operation-result h5').innerText=`Result: ${res.data}`;
-    })
-
-    e.target.reset();
-    setTimeout(() => window.location.replace('/index'), 1500);
 
   });
 
+}
+
+function abilityOperations(){
+
+  let abilityTable= document.getElementById('ability-table'),
+      req={
+        type:'GET',
+        endpoint:'src/controllers/AbilityController.php?q=1',
+        args:null
+      };
+
+  if(abilityTable){
+    let abilityRow= document.getElementById('ability-row').content;
+    abilityTable.innerHTML="";
+    ajaxRequest(req, res=>{
+      res.data.forEach(row=>{
+        abilityRow.querySelector('.ability-name').textContent = row.name;
+        abilityRow.querySelector('.ability-desc').textContent = row.description;
+        
+        getAbilitySpecies(row.pokemon, species=>{
+            abilityRow.querySelector('.ability-poke').textContent = species.join(', ');
+        });
+        
+
+        let clone = document.importNode(abilityRow, true);
+        abilityTable.appendChild(clone);
+      });
+    });
+  }
+
+}
+
+function getAbilitySpecies(abilityObj, callback){
+  let abilities=[];
+  abilityObj.forEach(obj=>{
+      abilities.push(obj.species);
+  });
+  callback(abilities);
+}
+
+function formatOperations(){
+  let formatTable= document.getElementById('format-table'),
+      req={
+        type:'GET',
+        endpoint:'src/controllers/FormatController.php?q=1',
+        args:null
+      };
+
+  if(formatTable){
+    let formatRow= document.getElementById('format-row').content;
+    formatTable.innerHTML="";
+    ajaxRequest(req, res=>{
+      res.data.forEach(row=>{
+        formatRow.querySelector('.format-name').textContent = row.name;
+        formatRow.querySelector('.format-desc').textContent = row.description;
+        
+         getFormatSpecies(row.pokemon, species=>{
+           formatRow.querySelector('.format-poke').textContent = species.join(', ');
+         });
+        
+
+        let clone = document.importNode(formatRow, true);
+        formatTable.appendChild(clone);
+      });
+    });
+  }
+}
+
+function getFormatSpecies(formatObj, callback){
+  let formats=[];
+  formatObj.forEach(obj=>{
+    formats.push(obj.species);
+  });
+  callback(formats);
 }

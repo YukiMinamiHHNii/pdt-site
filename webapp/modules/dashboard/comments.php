@@ -3,7 +3,7 @@
         Comments
     </h1>
     <p>
-        Have a suggestion on how can this site can be improved or just want to talk? Leave your comments.
+        Have a suggestion on how this site could be improved or just want to talk? Leave your comments.
     </p>
     <div class="row">
         <form class="col s12 comment-form">

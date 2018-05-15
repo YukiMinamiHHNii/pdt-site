@@ -43,17 +43,18 @@
         $conn = $this->connect();
 
         if($conn){
-          $query=$conn->prepare('SELECT * FROM typing');
+          $query=$conn->prepare('SELECT format_id, name FROM battle_format limit 10');
           $query->execute();
           $result = $query->get_result();
           $data= array();
 
           while($row = $result->fetch_assoc()) {
+            $row['pokemon']=$this->read_format_species($row['format_id']);
             array_push($data, $row);
           }
 
           $res = array(
-            'type'=>'Read typing',
+            'type'=>'Read battle format',
             'numRows' => $result->num_rows,
             'data' => $data
           );
@@ -63,8 +64,8 @@
 
       } catch (Exception $e) {
         $res = array(
-            'type'=>'Read typing',
-            'data'=>'Error while reading typing',
+            'type'=>'Read battle format',
+            'data'=>'Error while reading battle_format',
             'message'=>$e->getMessage()
           );
       }finally{
@@ -72,6 +73,44 @@
       }
 
       return json_encode($res);
+
+    }
+
+    public function read_format_species($format_id){
+
+      try {
+        $conn = $this->connect();
+
+        if($conn){
+          $query=$conn->prepare('SELECT s.species_id AS species
+                                 FROM battle_format bf
+                                 INNER JOIN format_species fs ON bf.format_id=fs.format_id
+                                 INNER JOIN species s ON s.species_id=fs.species_id
+                                 WHERE bf.format_id= ?');
+          
+          $query->bind_param('i', $format_id);
+          $query->execute();
+          $result = $query->get_result();
+          $data= array();
+
+          while($row = $result->fetch_assoc()) {
+            array_push($data, $row);
+          }
+
+        }else{
+          throw new Exception("Error Processing Request", 1);
+        }
+      } catch (Exception $e) {
+        $data = array(
+            'type'=>'Read format species',
+            'data'=>'Error while reading species from format ${format_id}',
+            'message'=>$e->getMessage()
+          );
+      }finally{
+        $conn=$this->disconnect();
+      }
+
+      return $data;
 
     }
 
