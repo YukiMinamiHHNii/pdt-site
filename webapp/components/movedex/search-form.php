@@ -1,9 +1,9 @@
 <form>
-  <div class="input-field inline col s12 m12 l4">
+  <div class="input-field inline col s12">
     <label for="search">Search:</label>
     <input name="search" type="text" class="validate">
   </div>
-  <div class="input-field col s12 m12 l4">
+  <!-- <div class="input-field col s12 m12 l4">
     <select name="filterType">
         <option value="" disabled selected>Choose your option</option>
         <option value="1">Option 1</option>
@@ -22,5 +22,5 @@
         <option value="5">Option 5</option>
       </select>
     <label>Value:</label>
-  </div>
+  </div> -->
 </form>

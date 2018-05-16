@@ -8,6 +8,7 @@
     showPokedexTable();
     getPokedexFilterValues();
     pokedexOperations();
+    moveOperations();
     typingOperations();
     abilityOperations();
     formatOperations();
@@ -334,6 +335,80 @@ function userOperations(){
     }
 
   });
+
+}
+
+function moveOperations(){
+  
+  let moveTable= document.getElementById('move-table'),
+      req={
+        type:'GET',
+        endpoint:'src/controllers/MoveController.php?q=1',
+        args:null
+      };
+
+  if(moveTable){
+    let moveRow= document.getElementById('move-row').content;
+    moveTable.innerHTML="";
+    ajaxRequest(req, res=>{
+      res.data.forEach(row=>{
+        moveRow.querySelector('.move-name').textContent = row.name;
+        moveRow.querySelector('.move-cat').textContent = row.category;
+        moveRow.querySelector('.move-typing').textContent = row.typing;
+        moveRow.querySelector('.move-power').textContent = row.power;
+        moveRow.querySelector('.move-acc').textContent = row.accuracy;
+        moveRow.querySelector('.move-desc').textContent = row.description;
+        moveRow.querySelector('.move-dialog').dataset.id = row.move_id;
+        moveRow.querySelector('.move-dialog').dataset.name = row.name;
+
+        let clone = document.importNode(moveRow, true);
+        moveTable.appendChild(clone);
+      });
+    });
+
+    document.addEventListener('click', e=>{
+      let moveDialog=document.getElementById('move-data');
+      if(e.target.matches('.move-dialog')){
+        moveDialog.querySelector('.move-name').textContent= e.target.dataset.name;
+      }
+
+      readMoveSpecies(e.target.dataset.id, species=>{
+        moveDialog.querySelector('.move-species').textContent= species.join(', ');
+      })
+
+    });
+
+  }
+
+}
+
+function readMoveSpecies(move_id, callback){
+  let req={
+        type:'GET',
+          endpoint:`src/controllers/MoveController.php?q=5&p=${move_id}`,
+          args:null
+        }
+
+  ajaxRequest(req, res=>{
+    
+    getMoveSpecies(res.data, e=>{
+      callback(e);
+    });
+
+  });
+
+}
+
+function getMoveSpecies(speciesObj, callback){
+
+    let species=[];
+    
+    speciesObj.forEach(obj=>{
+      species.push(obj.species_id);
+    });
+    
+    console.log(species);
+    callback(species);
 
 }
 
